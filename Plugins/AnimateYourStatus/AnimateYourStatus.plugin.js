@@ -112,9 +112,10 @@ class AnimateYourStatus {
         settings.appendChild(timeout);
 
         settings.appendChild(GUI.newDivider());
-        //
-        settings.appendChild(GUI.newLabel('Smile'));
+        // smile
+        settings.appendChild(GUI.newLabel('Emoji'));
         let smile = GUI.newSmile();
+        smile.placeholder = "emoji\nemoji\n..."
         smile.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace";
         smile.value = this.animationToStr(this.getData("Smile"));
         settings.appendChild(smile);
@@ -124,7 +125,7 @@ class AnimateYourStatus {
         settings.appendChild(GUI.newLabel('Your Statuses'));
         let status = GUI.newTextarea();
         status.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace,Autour One, Crafty Girls";
-        status.placeholder = '"Message 1",\n"Message 2", ""\n...';
+        status.placeholder = '"Message 1",\n"Message 2",\n...';
         status.value = this.animationToStr(this.getData("YourStatuses"));
         settings.appendChild(status);
 
@@ -203,7 +204,7 @@ const GUI = {
         let textarea = document.createElement("textarea");
         textarea.className = "input-cIJ7To scrollbarGhostHairline-1mSOM1";
         textarea.style.resize = "vertical";
-        textarea.rows = 4;
+        textarea.rows = 3;
         return textarea;
     },
 
@@ -211,7 +212,8 @@ const GUI = {
         let textSmile = document.createElement("textarea");
         textSmile.className = "input-cIJ7To scrollbarGhostHairline-1mSOM1";
         textSmile.style.resize = "vertical";
-        textSmile.rows = 1;
+        textSmile.rows = 3;
+        textSmile.cols = 1;
         return textSmile;
     },
 
