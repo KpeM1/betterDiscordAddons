@@ -49,4 +49,4 @@ ____
 Press buttons "Save" and "Apply".  
 Settings are saved in .json file and you can edit him w/o discord.
 
-> find and re::coded by me  
+> finded and re::coded by me  
