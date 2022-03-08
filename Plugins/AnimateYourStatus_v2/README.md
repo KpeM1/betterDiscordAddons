@@ -4,10 +4,10 @@ ____
 After install plugin, need open settings:  
 > Press on this gear  
 > 
-![.](https://i.imgur.com/R12Y22h.png "settings")
+![.](https://i.imgur.com/N0U6pYt.png "settings")
 > This window will open
 > 
-![.](https://i.imgur.com/fMb6rJe.png "settings")
+![.](https://i.imgur.com/XyW8wJB.png "settings")
 
 ____
 ## AUTHORIZATION TOKEN
