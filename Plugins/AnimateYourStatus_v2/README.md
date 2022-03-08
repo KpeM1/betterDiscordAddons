@@ -43,7 +43,11 @@ Enter your text without quotation marks and punctuation marks from a new line.
 > For example:  
 > ![.](https://i.imgur.com/3s1iXhi.png "status")   
 > 
-**Text choose randomly.**  
+____
+##Enable random choice
+> You can choose how the statuses will change: sequentially or randomly.
+> > ![.](https://i.imgur.com/ZJDb4nB.png "status")  disable 
+> 
 ____ 
 ## END
 Press buttons "Save" and "Apply".  
