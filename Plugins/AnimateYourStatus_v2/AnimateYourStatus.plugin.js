@@ -9,15 +9,23 @@
 
 module.exports = class AnimateYourStatus {
 
-    getName() { return "AnimateYourStatus";}
+    getName() { return "AnimateYourStatus"; }
 
     setData(key, value) {
         BdApi.setData(this.getName(), key, value);
     }
 
+    deleteData (key)
+    {
+        BdApi.deleteData(this.getName(), key);
+    }
+
     getData(key) {
+        
+        
         return BdApi.getData(this.getName(), key);
     }
+
     load() {
         this.timeout = this.getData("timeout");
         if (this.timeout < 3000) {
@@ -25,56 +33,50 @@ module.exports = class AnimateYourStatus {
             this.setData("timeout", 3000);
         }
         this.randomEnabled = this.getData("RandomEnabled");
-
         this.status = this.getData("YourStatuses");
         this.smile = this.getData("Smile");
-
-        Status.authToken = this.getData("token");
-        } // Optional function. Called when the plugin is loaded in to memory
+        Status.authToken = this.getData("token");  
+    }
 
     start() {
         if (this.status == undefined || this.timeout == undefined || Status.authToken == undefined) return;
         this.changeStatus();
-        } // Required function. Called when the plugin is activated (including after reloads)
+    }
     stop() {
         clearTimeout(this.loop);
         Status.unset();
-        } // Required function. Called when the plugin is deactivated
-        getRandomArbitrary(min, max) {
+    }
+    getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
 
     changeStatus(index = 0, ind = 0) {
-        if (index > this.status.length-1) {
+        if (index > (this.status.length-1)) {
             index = 0;
         }
-        if (ind > this.smile.length - 1) {
-            ind = 0;
+        if (ind > (this.smile.length-1)) {
             
+            ind = 0;
         }
-        let smile="";
+        let _smile = this.smile[ind];
         let str = this.status[index];
-        if (index < this.smile.length) {
-            smile = this.smile[index];
+        //console.log("size smile " + (this.smile.length));
+        //console.log("size status " + (this.status.length));
+        //console.log(index + " - " + str + " | "+ ind + " - " + _smile);
+        Status.set(str, _smile);
+
+        if (this.randomEnabled == true) {
+            let i = this.getRandomArbitrary(0, this.status.length);
+            i = Math.trunc(i);
+            //console.log("i= " + i + " length= " + (this.status.length-1));
+            this.loop = setTimeout(() => { this.changeStatus(i, i); }, this.timeout);
         }
         else {
-            smile = "";      
-        }
-        Status.set(str, smile);
-        if (this.randomEnabled==true)
-        {
-        let i = this.getRandomArbitrary(0, this.status.length);
-        i = Math.trunc(i);
-        //console.log("i= " + i + " length= " + (this.status.length-1));
-        
-        this.loop = setTimeout(() => { this.changeStatus(i, i); }, this.timeout);
-        }
-        else
-        {
-            let i=index;
             //console.log("i= " + i);
-            i++;
-            this.loop = setTimeout(() => { this.changeStatus(i, i); }, this.timeout);
+            index++;
+            ind++;
+            //console.log(index + " | " + ind);
+            this.loop = setTimeout(() => { this.changeStatus(index, ind); }, this.timeout);
         }
     }
 
@@ -82,8 +84,7 @@ module.exports = class AnimateYourStatus {
         let lines = str.split("\n");
         let out = [];
         for (let i = 0; i < lines.length; i++) {
-            if (lines[i].length!=0)
-            {
+            if (lines[i].length != 0) {
                 out.push(lines[i]);
             }
             //out.push(JSON.parse("[" + lines[i] + "]"));
@@ -102,51 +103,60 @@ module.exports = class AnimateYourStatus {
     }
 
     getSettingsPanel() {
-        let settings = document.createElement("div");
         
+        console.log("settings open");
+        
+        let settings = document.createElement("div");
+
         // Auth token
         //settings.appendChild(GUI.newLabel("Auth Token (https://discordhelp.net/discord-token)"));
         let val = GUI.newLabel("Authorization Token (https://discordhelp.net/discord-token)");
         settings.appendChild(val);
-        let token = GUI.newInputPassw();
-        token.value = this.getData("token");
-        settings.appendChild(token);
+        let _token = GUI.newInputPassw();
+        _token.value = Status.authToken;
+        settings.appendChild(_token);
         val.contentEditable = true;
 
         settings.appendChild(GUI.newDivider());
-
+        
         // timeout
         settings.appendChild(GUI.newLabel("how often to change the status? (ms)"));
-        let timeout = GUI.newInput();
-        timeout.placeholder = "min 3000"
-        timeout.value = this.getData("timeout");
-        settings.appendChild(timeout);
+        let _timeout = GUI.newInput();
+        _timeout.placeholder = "min 3000"
+        _timeout.value = this.getData("timeout");
+        settings.appendChild(_timeout);
 
         settings.appendChild(GUI.newDivider());
         // smile
         settings.appendChild(GUI.newLabel('Emoji'));
-        let smile = GUI.newSmile();
-        smile.placeholder = "emoji\nemoji\n..."
-        smile.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace";
-        smile.value = this.animationToStr(this.getData("Smile"));
-        settings.appendChild(smile);
-
+        let _smile = GUI.newSmile();
+        _smile.placeholder = "emoji\nemoji\n..."
+        _smile.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace";
+        _smile.value = this.animationToStr(this.smile);
+        settings.appendChild(_smile);
+   
         settings.appendChild(GUI.newDivider());
         // Animation
         settings.appendChild(GUI.newLabel('Your Statuses'));
-        let status = GUI.newTextarea();
-        status.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace,Autour One, Crafty Girls";
-        status.placeholder = '"Message 1",\n"Message 2",\n...';
-        status.value = this.animationToStr(this.getData("YourStatuses"));
-        settings.appendChild(status);
+        let _status = GUI.newTextarea();
+        _status.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace,Autour One, Crafty Girls";
+        _status.placeholder = '"Message 1",\n"Message 2",\n...';
+        _status.value = this.animationToStr(this.status);
+        settings.appendChild(_status);
 
         //switch
         settings.appendChild(GUI.newDivider());
         settings.appendChild(GUI.newLabel('Enable or Disable random chose your status:'));
-        
+
         let switchBut = GUI.newSwitch(this.randomEnabled);
-        switchBut.onclick = () => {
-            if (this.rand==true) { this.rand = false;} else { this.rand=true; }
+        switchBut.onclick = () => {            
+            if (this.randomEnabled == true) {
+                this.randomEnabled = false;
+            }
+            else {
+                
+                this.randomEnabled = true;
+            }
         };
         settings.appendChild(switchBut);
 
@@ -155,15 +165,15 @@ module.exports = class AnimateYourStatus {
         let save = GUI.newButton("Save");
         save.onclick = () => {
             //Set Auth token
-            this.setData("token", token.value);
+            this.setData("token", _token.value);
             //Set timeout
-            this.setData("timeout", timeout.value);
+            this.setData("timeout", _timeout.value);
             //Set Smile
-            this.setData("Smile", this.strToAnimation(smile.value));
+            this.setData("Smile", this.strToAnimation(_smile.value));
             //Set Animation
-            this.setData("YourStatuses", this.strToAnimation(status.value));
+            this.setData("YourStatuses", this.strToAnimation(_status.value));
             //Set RandomEnabled
-            this.setData("RandomEnabled", this.rand);
+            this.setData("RandomEnabled", this.randomEnabled);
 
             this.stop();
             this.load();
@@ -171,10 +181,23 @@ module.exports = class AnimateYourStatus {
         };
         settings.appendChild(save);
 
+
+        //load
+        /*settings.appendChild(GUI.newDivider());
+        let load = GUI.newButton("Load");
+        load.onclick = () => {
+
+            this.stop();
+            this.deleteData("rand");
+            
+            this.load();
+            this.start();
+        };
+        settings.appendChild(load);*/
         // End
         return settings;
     }
-    observer(changes) {} // Optional function. Observer for the `document`. Better documentation than I can provide is found here: <https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver>
+    observer(changes) { } // Optional function. Observer for the `document`. Better documentation than I can provide is found here: <https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver>
 }
 
 /* Status API */
@@ -246,24 +269,24 @@ const GUI = {
         return button;
     },
 
-    newSwitch: (value)=>{
+    newSwitch: (value) => {
         let switchB = document.createElement("div");
         switchB.className = "bd-switch";
 
         let inp = document.createElement("input");
         inp.type = "checkbox";
         if (value) inp.setAttribute("checked", true);
-        
+
         let div = document.createElement("div");
         div.className = "bd-switch-body";
-        
+
         let svg = document.createElement("svg");
         svg.className = "bd-switch-slider";
 
         div.appendChild(svg);
         switchB.appendChild(inp);
         switchB.appendChild(div);
-        
+
         return switchB;
 
     }
