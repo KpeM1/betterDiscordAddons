@@ -56,7 +56,7 @@ ENABLE:
 > ![.](https://i.imgur.com/1ZYfrZp.png "")
 ____ 
 ## END
-Press buttons "Save" and "Apply".  
+Press buttons "Save" and "Done".  
 Settings are saved in .json file.
 
 > finded and re::coded by me  
