@@ -1,5 +1,6 @@
 ____
 [![](https://camo.githubusercontent.com/69f3bb817fb2450a18c1087d187cb5581a50a74c4ee6537778b27123104371cd/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f444f574e4c4f41442d7265642e737667)](https://github.com/KpeM1/betterDiscordAddons/releases/download/v2/AnimateYourStatus.plugin.js)
+____
 # Animates the status in discord on all servers where it can.
 ____
 ## OPEN SETTINGS
