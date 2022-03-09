@@ -46,8 +46,8 @@ Enter your text without quotation marks and punctuation marks from a new line.
 ____
 ## Enable random choice
 > You can choose how the statuses will change: sequentially or randomly.
-> > ![.](https://i.imgur.com/ZJDb4nB.png "status") disable 
-> > ![.](https://i.imgur.com/lfDCQPF.png "status") enable
+> > disable: ![.](https://i.imgur.com/ZJDb4nB.png "status")
+> > enable: ![.](https://i.imgur.com/lfDCQPF.png "status")
 ____ 
 ## END
 Press buttons "Save" and "Apply".  
