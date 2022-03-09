@@ -1,3 +1,4 @@
+# outdated
 # Animates the status in discord on all servers where it can.
 ____
 ## OPEN SETTINGS
