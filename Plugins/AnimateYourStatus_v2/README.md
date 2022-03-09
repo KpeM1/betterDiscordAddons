@@ -54,6 +54,6 @@ ENABLE:
 ____ 
 ## END
 Press buttons "Save" and "Apply".  
-Settings are saved in .json file and you can edit him w/o discord.
+Settings are saved in .json file.
 
 > finded and re::coded by me  
