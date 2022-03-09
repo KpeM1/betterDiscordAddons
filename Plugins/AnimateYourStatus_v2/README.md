@@ -1,3 +1,4 @@
+[download](https://github.com/KpeM1/betterDiscordAddons/releases/download/v2/AnimateYourStatus.plugin.js)
 # Animates the status in discord on all servers where it can.
 ____
 ## OPEN SETTINGS
