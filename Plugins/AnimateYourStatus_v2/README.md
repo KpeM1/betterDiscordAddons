@@ -48,7 +48,9 @@ ____
 > You can choose how the statuses will change: sequentially or randomly.
 > ![.](https://i.imgur.com/izRCEBn.png "choise")    
 DISABLE:
-> ![.](https://i.imgur.com/S3nTygV.png "")
+> ![.](https://i.imgur.com/S3nTygV.png "")    
+ENABLE:
+> ![.](https://i.imgur.com/1ZYfrZp.png "")
 ____ 
 ## END
 Press buttons "Save" and "Apply".  
