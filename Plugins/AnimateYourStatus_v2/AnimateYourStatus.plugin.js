@@ -112,6 +112,7 @@ module.exports = class AnimateYourStatus {
         //settings.appendChild(GUI.newLabel("Auth Token (https://discordhelp.net/discord-token)"));
         let val = GUI.newLabel("Authorization Token (https://discordhelp.net/discord-token)");
         settings.appendChild(val);
+        settings.appendChild(GUI.newDivider_());
         let _token = GUI.newInputPassw();
         _token.value = Status.authToken;
         settings.appendChild(_token);
@@ -121,6 +122,7 @@ module.exports = class AnimateYourStatus {
         
         // timeout
         settings.appendChild(GUI.newLabel("how often to change the status? (ms)"));
+        settings.appendChild(GUI.newDivider_());
         let _timeout = GUI.newInput();
         _timeout.placeholder = "min 3000"
         _timeout.value = this.getData("timeout");
@@ -129,6 +131,7 @@ module.exports = class AnimateYourStatus {
         settings.appendChild(GUI.newDivider());
         // smile
         settings.appendChild(GUI.newLabel('Emoji'));
+        settings.appendChild(GUI.newDivider_());
         let _smile = GUI.newSmile();
         _smile.placeholder = "emoji\nemoji\n..."
         _smile.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace";
@@ -138,6 +141,7 @@ module.exports = class AnimateYourStatus {
         settings.appendChild(GUI.newDivider());
         // Animation
         settings.appendChild(GUI.newLabel('Your Statuses'));
+        settings.appendChild(GUI.newDivider_());
         let _status = GUI.newTextarea();
         _status.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace,Autour One, Crafty Girls";
         _status.placeholder = '"Message 1",\n"Message 2",\n...';
@@ -146,7 +150,8 @@ module.exports = class AnimateYourStatus {
 
         //switch
         settings.appendChild(GUI.newDivider());
-        settings.appendChild(GUI.newLabel('Enable or Disable random chose your status:'));
+        settings.appendChild(GUI.newLabel('Enable or Disable random choice your status:'));
+        settings.appendChild(GUI.newDivider_());
 
         let switchBut = GUI.newSwitch(this.randomEnabled);
         switchBut.onclick = () => {            
@@ -222,31 +227,36 @@ const Status = {
 };
 
 const GUI = {
+    newDivider_: () => {
+        let divider = document.createElement("div")
+        divider.style.paddingTop = "5px";
+        return divider;
+    },
     newDivider: () => {
         let divider = document.createElement("div")
-        divider.style.paddingTop = "10px";
+        divider.style.paddingTop = "15px";
         return divider;
     },
     newInput: () => {
         let input = document.createElement("input");
-        input.className = "inputDefault-3FGxgL input-2g-os5";
+        input.className = "inputDefault-Ciwd-S input-3O04eu";
         return input;
     },
     newInputPassw: () => {
         let input = document.createElement("input");
-        input.className = "inputDefault-3FGxgL input-2g-os5";
+        input.className = "inputDefault-Ciwd-S input-3O04eu";
         input.setAttribute("type", "password");
         return input;
     },
     newLabel: (text) => {
         let label = document.createElement("h5");
-        label.className = "colorStandard-21JIj7 size14-3fJ-ot h5-2RwDNl title-3hptVQ defaultMarginh5-3Jxf6f";
+        label.className = "colorStandard-1Xxp1s size14-3fJ-ot h5-2RwDNl title-3hptVQ defaultMarginh5-3Jxf6f";
         label.innerText = text;
         return label;
     },
     newTextarea: () => {
         let textarea = document.createElement("textarea");
-        textarea.className = "input-2g-os5";
+        textarea.className = "inputDefault-Ciwd-S input-3O04eu";
         textarea.style.resize = "vertical";
         textarea.rows = 4;
         return textarea;
@@ -254,7 +264,7 @@ const GUI = {
 
     newSmile: () => {
         let textSmile = document.createElement("textarea");
-        textSmile.className = "input-2g-os5";
+        textSmile.className = "inputDefault-Ciwd-S input-3O04eu";
         textSmile.style.resize = "vertical";
         textSmile.rows = 4;
         textSmile.cols = 1;
@@ -263,13 +273,14 @@ const GUI = {
 
     newButton: (text) => {
         let button = document.createElement("button");
-        button.className = "bd-button button-f2h6uQ lookFilled-yCfaCM colorBrand-I6CyqQ sizeMedium-2bFIHr grow-2sR_-F";
+        button.className = "button-ejjZWC lookFilled-1H2Jvj colorBrand-2M3O3N sizeMedium-2oH5mg grow-2T4nbg";
         //button.className = "marginBottom8-emkd0_ button-1cRKG6 button-f2h6uQ lookFilled-yCfaCM colorBrand-I6CyqQ sizeLarge-3mScP9 fullWidth-fJIsjq grow-2sR_-F";
         button.innerText = text;
         return button;
     },
 
     newSwitch: (value) => {
+
         let switchB = document.createElement("div");
         switchB.className = "bd-switch";
 
@@ -282,6 +293,33 @@ const GUI = {
 
         let svg = document.createElement("svg");
         svg.className = "bd-switch-slider";
+        svg.setAttribute("viewBox", "0 0 28 20");
+        svg.setAttribute("preserveAspectRatio", "xMinYMid meet");
+
+        let rect = document.createElement("rect");
+        rect.className = "bd-switch-handle";
+        rect.setAttribute("fill", "white");
+        rect.setAttribute("x", "4");
+        rect.setAttribute("y", "0");
+        rect.setAttribute("height", "20");
+        rect.setAttribute("width", "20");
+        rect.setAttribute("rx", "10");
+        
+        let svg2 = document.createElement("svg");
+        svg2.className = "bd-switch-symbol";
+        svg2.setAttribute("viewBox", "0 0 20 20");
+        svg2.setAttribute("fill", "none");
+        
+        let path = document.createElement("path");
+        let path2 = document.createElement("path");
+        
+        svg2.appendChild(path);
+        svg2.appendChild(path2);
+
+        
+        svg.appendChild(rect);
+        svg.appendChild(svg2);
+
 
         div.appendChild(svg);
         switchB.appendChild(inp);
