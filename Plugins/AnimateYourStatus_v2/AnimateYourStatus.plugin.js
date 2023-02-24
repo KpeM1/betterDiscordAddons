@@ -4,7 +4,7 @@
  * @authorId 353187047693090818
  * @description Animated Your Discord Status.
  * @source https://github.com/KpeM1/betterDiscordAddons/blob/main/Plugins/AnimateYourStatus_v2/AnimateYourStatus.plugin.js
- * @version 0.2.0
+ * @version 0.2.1
 */
 
 module.exports = class AnimateYourStatus {
