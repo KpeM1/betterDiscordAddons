@@ -4,7 +4,7 @@
  * @authorId 353187047693090818
  * @description Animated Your Discord Status.
  * @source https://github.com/KpeM1/betterDiscordAddons/blob/main/Plugins/AnimateYourStatus_v2/AnimateYourStatus.plugin.js
- * @version 0.2.1
+ * @version 0.2.2
  * @updateUrl https://github.com/KpeM1/betterDiscordAddons/blob/main/Plugins/AnimateYourStatus_v2/AnimateYourStatus.plugin.js
 */
 
@@ -226,8 +226,9 @@ const Status = {
         Status.request().send('{"custom_status":null}');
     }
 };
-
+var input_class = 'inputDefault__80165 input_d266e7';
 const GUI = {
+    
     newDivider_: () => {
         let divider = document.createElement("div")
         divider.style.paddingTop = "5px";
@@ -240,12 +241,12 @@ const GUI = {
     },
     newInput: () => {
         let input = document.createElement("input");
-        input.className = "inputDefault-Ciwd-S input-3O04eu";
+        input.className = input_class;
         return input;
     },
     newInputPassw: () => {
         let input = document.createElement("input");
-        input.className = "inputDefault-Ciwd-S input-3O04eu";
+        input.className = input_class;
         input.setAttribute("type", "password");
         return input;
     },
@@ -257,7 +258,8 @@ const GUI = {
     },
     newTextarea: () => {
         let textarea = document.createElement("textarea");
-        textarea.className = "inputDefault-Ciwd-S input-3O04eu";
+        textarea.className = input_class;
+        //textarea.className = "inputDefault-Ciwd-S input-3O04eu";
         textarea.style.resize = "vertical";
         textarea.rows = 4;
         return textarea;
@@ -265,7 +267,7 @@ const GUI = {
 
     newSmile: () => {
         let textSmile = document.createElement("textarea");
-        textSmile.className = "inputDefault-Ciwd-S input-3O04eu";
+        textSmile.className = input_class;
         textSmile.style.resize = "vertical";
         textSmile.rows = 4;
         textSmile.cols = 1;
@@ -274,7 +276,7 @@ const GUI = {
 
     newButton: (text) => {
         let button = document.createElement("button");
-        button.className = "button-ejjZWC lookFilled-1H2Jvj colorBrand-2M3O3N sizeMedium-2oH5mg grow-2T4nbg";
+        button.className = "button_afdfd9 lookFilled__19298 colorBrand_b2253e sizeMedium_c6fa98 grow__4c8a4";
         //button.className = "marginBottom8-emkd0_ button-1cRKG6 button-f2h6uQ lookFilled-yCfaCM colorBrand-I6CyqQ sizeLarge-3mScP9 fullWidth-fJIsjq grow-2sR_-F";
         button.innerText = text;
         return button;
